@@ -1,0 +1,65 @@
+#!/bin/python3
+
+import socket
+import os
+import random
+import time
+from cfonts import *
+import sys
+
+os.system('chmod +x open-port')
+if os.path.exists('/usr/bin/open-port'):
+    pass
+else:
+    os.system('cp open-port /usr/bin')
+    os.remove('open-port')
+
+F = '\033[2;32m'
+Z = '\033[1;31m'
+X = '\033[1;33m' 
+F = '\033[2;32m'
+A = '\033[2;34m'
+C = '\033[2;35m' 
+B = '\033[2;36m'
+Y = '\033[1;34m' 
+G = ['red','green','blue']
+v = str(random.choice(G))
+b = str(random.choice(G))
+k = str(random.choice(G))
+
+def logo():
+        os.system('clear')
+        ar = render('OPENPORT',colors=[v, b, k],align='center')
+        print()
+        for ar in ar.splitlines():
+                time.sleep(0.10)
+                print(ar)
+        print(X+"Programmer : @C0_28 | @VZX_TEAM")
+        print()
+
+def open_port():
+	hello = "hello"
+	host = input(C+'[~] Enter Your Ip : '+A)
+	port = int(input(C+'[~] Enter Your Port : '+A))
+	with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+		s.bind((host,port))
+		s.listen()
+		conn, addr = s.accept()
+		with conn:
+			print("Connected With : ", addr)
+			while True:
+				data = conn.recv(5024)
+				if not data:
+					break
+				conn.sendall(data)
+			print()
+			print(F+"The Port "+port+"Is Open"+"In Ip : "+host)
+			
+try:
+  logo()
+  open_port()
+except :
+	print()
+	print(C+"[-] Please Run Me As Sudo")
+finally:
+	print(C+"[-] Error, Please Try Again ...")

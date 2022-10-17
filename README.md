@@ -6,6 +6,7 @@ apt install python3
 pip install python-cfonts
 pip install requests
 python3 open-port
+##
 
 #After Install ?
 open-port
